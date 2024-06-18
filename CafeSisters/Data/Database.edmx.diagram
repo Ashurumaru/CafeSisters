@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="db201a17cb6249058d5575c0b8dc51bd" Name="Diagram1">
+        <EntityTypeShape EntityType="CafeSistersModel.Employees" Width="1.5" PointX="11" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.IngredientCategories" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.Ingredients" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.MenuRecipes" Width="1.5" PointX="11.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.Menus" Width="1.5" PointX="9" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.NutritionalValues" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.OrderDetails" Width="1.5" PointX="15.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.Orders" Width="1.5" PointX="13.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.OrderStatuses" Width="1.5" PointX="11" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.Positions" Width="1.5" PointX="8.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.ProcessingTypes" Width="1.5" PointX="6" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.ProductCategories" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.RecipeIngredients" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.RecipeInstructions" Width="1.5" PointX="8.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.Recipes" Width="1.5" PointX="6" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.StorageLocations" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.Suppliers" Width="1.5" PointX="2.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeSistersModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <AssociationConnector Association="CafeSistersModel.FK__Employees__Posit__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK__Orders__Employee__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK_Ingredients_IngredientCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK__Ingredien__Categ__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK__Ingredien__Stora__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK__Nutrition__Ingre__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK__RecipeIng__Ingre__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK__MenuRecip__MenuI__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK__MenuRecip__Recip__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK__OrderDeta__Order__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK__OrderDeta__Recip__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK__Orders__StatusId__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK__RecipeIng__Proce__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK__RecipeIng__Recip__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeSistersModel.FK__RecipeIns__Recip__5812160E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
