@@ -5,10 +5,140 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CafeSisters.Views.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="RecipeManagementPage">
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="Управление рецептами">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid VerticalAlignment="Top" Name="TopPanel">
+            <StackPanel Orientation="Horizontal" >
+                <Button x:Name="btnCreateRecipe" Content="Создать рецепт" Click="CreateRecipe_Click" HorizontalAlignment="Left" Margin="5 5 5 20" Style="{DynamicResource CustomButtonStyle}" Width="150"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="Фильтр по категории:" Style="{DynamicResource StandartText}" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CategoryRecipeComboBox" Width="150" SelectionChanged="CategoryComboBox_SelectionChanged" DisplayMemberPath="CategoryName" SelectedValuePath="RecipeCategoryId" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="5"/>
+                    <TextBox x:Name="SearchRecipeTextBox" Width="200" TextChanged="SearchRecipeTextBox_TextChanged" Tag="Поиск" HorizontalAlignment="Right" Style="{DynamicResource CustomTextBoxStyle}" Margin="5 5 5 20"/>
+                <Button x:Name="btnResetRecipeSearch" Content="Сбросить" Click="ResetRecipeSearch_Click" HorizontalAlignment="Right" Margin="5 5 5 20" Style="{DynamicResource CustomButtonStyle}" Width="80"/>
+            </StackPanel>
+
+        </Grid>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Background="Transparent" Margin="0 0 0 0">
+            <ItemsControl x:Name="RecipeList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{DynamicResource ColorpPeach}" BorderBrush="{DynamicResource ActiveColorpPeach}" BorderThickness="2" CornerRadius="5" Margin="5">
+                            <Grid>
+                                <StackPanel Margin="5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Рецепт №: " FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding RecipeId}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Название: " FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding RecipeName}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Стоимость: " FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding Cost, StringFormat={}{0:F2}}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Время приготовления: " FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding PreparationTime}"/>
+                                    </StackPanel>
+                                    <TextBlock Text="Инструкции: " FontWeight="Bold" Margin="0,0,0,0"/>
+                                    <TextBlock Text="{Binding Instruction}" TextWrapping="WrapWithOverflow" Width="400" HorizontalAlignment="Left" Margin="0 0 0 0" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5,10,5,10">
+                                    <Button Content="Редактировать" Click="EditRecipe_Click" Style="{DynamicResource CustomButtonStyle}" CommandParameter="{Binding RecipeId}" Width="110"/>
+                                    <Button Content="Удалить" Click="DeleteRecipe_Click" Style="{DynamicResource CustomButtonStyle}" CommandParameter="{Binding RecipeId}" Width="90" Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                        </DataTemplate>
+
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Grid x:Name="RecipeForm" Grid.RowSpan="2" Margin="10" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="10">
+                <TextBlock Text="Название рецепта:" FontWeight="Bold" Margin="5"/>
+                <TextBox x:Name="RecipeNameTextBox" Width="300" Margin="5" Style="{DynamicResource CustomTextBoxStyle}"/>
+                <TextBlock Text="Стоимость:" FontWeight="Bold" Margin="5"/>
+                <TextBox x:Name="RecipeCostTextBox" Width="300" Margin="5" Style="{DynamicResource CustomTextBoxStyle}" PreviewTextInput="RecipeCostTextBox_PreviewTextInput"/>
+                <TextBlock Text="Время приготовления:" FontWeight="Bold" Margin="5"/>
+                <TextBox x:Name="RecipePrepTimeTextBox" Width="300" Margin="5" Style="{DynamicResource CustomTextBoxStyle}" PreviewTextInput="RecipePrepTimeTextBox_PreviewTextInput"/>
+                <TextBlock Text="Инструкция:" FontWeight="Bold" Margin="5"/>
+                <TextBox x:Name="RecipeInstructionTextBox" Width="300" Margin="5" Style="{DynamicResource CustomTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" Height="100"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+                <TextBlock Text="Ингредиенты:" FontWeight="Bold" Margin="5"/>
+                <ScrollViewer  VerticalScrollBarVisibility="Auto" Height="170" Background="Transparent" Margin="0 0 0 0">
+                    <ItemsControl x:Name="RecipeIngredientsControl">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="1" BorderBrush="{DynamicResource ColorpPeach}" CornerRadius="5" Margin="5">
+                                    <StackPanel Margin="5">
+                                        <TextBlock Text="{Binding IngredientName}" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="Количество: " FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="50" Margin="5 0 0 0" VerticalAlignment="Center" PreviewTextInput="QuantityTextBox_PreviewTextInput"/>
+                                            <TextBlock Text="{Binding Unit}" Margin="5 0 0 0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="Тип обработки: " FontWeight="Bold" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding ProcessingTypeName}" Margin="5 0 0 0" VerticalAlignment="Center"/>
+                                            <Button Content="Удалить" Click="DeleteIngredientFromRecipe_Click" Style="{DynamicResource CustomButtonStyle}" Width="80" Margin="10,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center" CommandParameter="{Binding IngredientId}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </StackPanel>
+
+            <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="10">
+                <TextBlock Text="Все ингредиенты:" FontWeight="Bold" Margin="5"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="SearchIngredientTextBox" Width="150" Margin="5" Style="{DynamicResource CustomTextBoxStyle}" TextChanged="SearchIngredientTextBox_TextChanged"/>
+                    <ComboBox x:Name="CategoryFilterComboBox" Width="150" Margin="5" SelectionChanged="CategoryFilterComboBox_SelectionChanged" DisplayMemberPath="CategoryName" SelectedValuePath="CategoryId"/>
+
+                </StackPanel>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="480">
+                    <ItemsControl x:Name="IngredientList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="1" BorderBrush="{DynamicResource ColorpPeach}" CornerRadius="5" Margin="5">
+                                    <StackPanel Margin="5">
+                                        <TextBlock Text="{Binding IngredientName}" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                                        <Button Content="Добавить" Click="AddIngredientToRecipe_Click" Style="{DynamicResource CustomButtonStyle}" Width="80" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" CommandParameter="{Binding IngredientId}"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <Button Content="Отмена" Click="CancelButton_Click" Style="{DynamicResource CustomButtonStyle}" Width="150" Margin="10"/>
+                <Button Content="Сохранить" Click="SaveRecipe_Click" Style="{DynamicResource CustomButtonStyle}" Width="150" Margin="10"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

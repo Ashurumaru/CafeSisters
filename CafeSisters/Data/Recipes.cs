@@ -20,7 +20,6 @@ namespace CafeSisters.Data
             this.MenuRecipes = new HashSet<MenuRecipes>();
             this.OrderDetails = new HashSet<OrderDetails>();
             this.RecipeIngredients = new HashSet<RecipeIngredients>();
-            this.RecipeInstructions = new HashSet<RecipeInstructions>();
         }
     
         public int RecipeId { get; set; }
@@ -28,14 +27,14 @@ namespace CafeSisters.Data
         public decimal Cost { get; set; }
         public string Instruction { get; set; }
         public int PreparationTime { get; set; }
+        public Nullable<int> RecipeCategoryId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MenuRecipes> MenuRecipes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
+        public virtual RecipeCategories RecipeCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecipeIngredients> RecipeIngredients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RecipeInstructions> RecipeInstructions { get; set; }
     }
 }

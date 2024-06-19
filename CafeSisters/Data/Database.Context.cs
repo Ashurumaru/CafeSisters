@@ -36,9 +36,8 @@ namespace CafeSisters.Data
         public virtual DbSet<OrderStatuses> OrderStatuses { get; set; }
         public virtual DbSet<Positions> Positions { get; set; }
         public virtual DbSet<ProcessingTypes> ProcessingTypes { get; set; }
-        public virtual DbSet<ProductCategories> ProductCategories { get; set; }
+        public virtual DbSet<RecipeCategories> RecipeCategories { get; set; }
         public virtual DbSet<RecipeIngredients> RecipeIngredients { get; set; }
-        public virtual DbSet<RecipeInstructions> RecipeInstructions { get; set; }
         public virtual DbSet<Recipes> Recipes { get; set; }
         public virtual DbSet<StorageLocations> StorageLocations { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }

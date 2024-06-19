@@ -1,4 +1,5 @@
 ﻿using CafeSisters.Data;
+using CafeSisters.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace CafeSisters.Views
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            string login = txLogin.Text;
+            string login = Login.Text;
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(_password))
             {
                 ErroeMessage.Text = "Введите логин и пароль.";
@@ -43,9 +44,18 @@ namespace CafeSisters.Views
                 var user = _context.Employees.SingleOrDefault(u => u.Login == login && u.Password == _password);
                 if (user != null)
                 {
-                    DashboardView dashbord = new DashboardView();
-                    MessageBox.Show($"Добро пожаловать {user.FirstName} {user.LastName}", "Окно приветствия");
-                    dashbord.Show();
+                    CurrentUser.EmployeeId = user.EmployeeId;
+                    CurrentUser.FirstName = user.FirstName;
+                    CurrentUser.Patronymic = user.Patronymic;
+                    CurrentUser.LastName = user.LastName;
+                    CurrentUser.PositionId = user.PositionId;
+                    CurrentUser.Phone = user.Phone;
+                    CurrentUser.Login = user.Login;
+                    CurrentUser.Password = user.Password;
+
+                    DashboardView dashboard = new DashboardView();
+                    MessageBox.Show($"Добро пожаловать {CurrentUser.FirstName} {CurrentUser.LastName}", "Окно приветствия");
+                    dashboard.Show();
                     this.Close();
                 }
                 else
@@ -56,7 +66,7 @@ namespace CafeSisters.Views
             }
             catch (Exception ex)
             {
-                ErroeMessage.Text = "Ошибка: " + ex.Message;
+                MessageBox.Show("Ошибка: " + ex.Message);
                 ErroeMessage.Opacity = 1;
             }
         }

@@ -29,7 +29,6 @@ namespace CafeSisters.Data
         public string Unit { get; set; }
     
         public virtual IngredientCategories IngredientCategories { get; set; }
-        public virtual ProductCategories ProductCategories { get; set; }
         public virtual StorageLocations StorageLocations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NutritionalValues> NutritionalValues { get; set; }

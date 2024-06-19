@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CafeSisters
+namespace CafeSisters.Views.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ReportManagementPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ReportManagementPage : Page
     {
-        public MainWindow()
+        public ReportManagementPage()
         {
             InitializeComponent();
         }

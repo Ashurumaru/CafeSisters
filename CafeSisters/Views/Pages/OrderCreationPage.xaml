@@ -9,6 +9,105 @@
       Title="Создание заказа">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBlock x:Name="TotalCostTextBlockMain" FontSize="30" FontWeight="Bold" Margin="0 0 0 0" Style="{DynamicResource StandartText}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0" Margin="0">
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="0">
+                <TextBlock Text="Выберите меню:" Style="{DynamicResource StandartText}"/>
+                <ComboBox x:Name="MenuComboBox" Width="150" SelectionChanged="MenuComboBox_SelectionChanged" DisplayMemberPath="MenuName" SelectedValuePath="MenuId" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0">
+                <TextBlock Text="Фильтр по категории:" Style="{DynamicResource StandartText}"/>
+                <ComboBox x:Name="CategoryComboBox" Width="150" SelectionChanged="CategoryComboBox_SelectionChanged" DisplayMemberPath="CategoryName" SelectedValuePath="RecipeCategoryId" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="5"/>
+            </StackPanel>
+        </StackPanel>
         
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Background="Transparent" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="10">
+            <ItemsControl x:Name="MenuItemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" Background="{DynamicResource ColorpPeach}" BorderBrush="#CCCCCC" CornerRadius="5" Margin="5">
+                            <StackPanel Margin="5">
+                                <TextBlock Text="{Binding RecipeName}" FontWeight="Bold" FontSize="14"/>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                                    <TextBlock Text="Цена: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Cost, StringFormat={}{0:F2}}" Margin="5 0 0 0"/>
+                                    <TextBlock Text="Ен. ценность: " FontWeight="Bold" Margin="10,0,0,0"/>
+                                    <TextBlock Text="{Binding EnergyValue, StringFormat={}{0:F2}}" Margin="5 0 0 0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                                    <TextBlock Text="Белки: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Proteins, StringFormat={}{0:F2}}" Margin="5 0 0 0"/>
+                                    <TextBlock Text="Жиры: " FontWeight="Bold" Margin="10,0,0,0"/>
+                                    <TextBlock Text="{Binding Fats, StringFormat={}{0:F2}}" Margin="5 0 0 0"/>
+                                    <TextBlock Text="Углеводы: " FontWeight="Bold" Margin="10,0,0,0"/>
+                                    <TextBlock Text="{Binding Carbohydrates, StringFormat={}{0:F2}}" Margin="5 0 0 0"/>
+                                   
+                                </StackPanel>
+                                <Button Style="{DynamicResource CustomButtonStyle}" Background="#e4ce9a" Content="Добавить" Width="150" Margin="5" Click="AddToCart_Click"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <StackPanel>
+            
+        </StackPanel>
+        <Border BorderThickness="2" BorderBrush="{DynamicResource ActiveColorpPeach}"  CornerRadius="10" Padding="5" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" Margin="10">
+            <StackPanel Orientation="Vertical" >
+                <TextBlock Text="Корзина:" Style="{DynamicResource StandartText}"  FontWeight="Bold" FontSize="16" Margin="5"/>
+                <ItemsControl x:Name="CartItemsControl">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <TextBlock Text="{Binding RecipeName}" Width="150" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Quantity}" Width="50" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding TotalCost}" Width="100" VerticalAlignment="Center"/>
+                                <Button Style="{DynamicResource CustomButtonStyle}" Content="Удалить" Width="80" Click="RemoveFromCart_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+        </Border>
+
+           
+
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="10 0 0 0"  HorizontalAlignment="Center" >
+                <TextBlock Text="Количество позиций: " FontWeight="Bold" Margin="0 0 0 0" Style="{DynamicResource StandartText}"/>
+                <TextBlock x:Name="TotalItemsTextBlock" FontWeight="Bold" Margin="0 0 0 0" Style="{DynamicResource StandartText}"/>
+                <TextBlock Text="Итого: " FontWeight="Bold" Margin="10,0,0,0" Style="{DynamicResource StandartText}"/>
+                <TextBlock x:Name="TotalCostTextBlock" FontWeight="Bold" Margin="0 0 0 0" Style="{DynamicResource StandartText}"/>
+            </StackPanel>
+
+            <Button Style="{DynamicResource CustomButtonStyle}" Content="Оформить заказ" Width="150" Height="38" Grid.Column="1" HorizontalAlignment="Right" Margin="5" Click="PlaceOrder_Click"/>
+        </Grid>
+        <StackPanel HorizontalAlignment="Left" Orientation="Vertical" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" Margin="10">
+            <CheckBox Style="{DynamicResource CustomCheckBoxStyle}"  x:Name="StopListCheckBox"  Content="Стоп-лист" Margin="10" Checked="StopListCheckBox_Checked" Unchecked="StopListCheckBox_Unchecked"/>
+            <CheckBox Style="{DynamicResource CustomCheckBoxStyle}"  x:Name="MenuTypeCheckBox" Content="Тип меню" Margin="10" Checked="MenuTypeCheckBox_Checked" Unchecked="MenuTypeCheckBox_Unchecked"/>
+            <CheckBox Style="{DynamicResource CustomCheckBoxStyle}"  x:Name="CheckPrintingCheckBox" Content="Печать чека" Margin="10" Checked="MenuTypeCheckBox_Checked" Unchecked="MenuTypeCheckBox_Unchecked"/>
+        </StackPanel>
     </Grid>
 </Page>

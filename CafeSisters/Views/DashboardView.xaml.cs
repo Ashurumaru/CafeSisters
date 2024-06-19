@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CafeSisters.Views.Pages;
+using System.Windows.Threading;
 
 namespace CafeSisters.Views
 {
@@ -21,16 +22,31 @@ namespace CafeSisters.Views
     /// </summary>
     public partial class DashboardView : Window
     {
+        private DispatcherTimer _timer;
+
         public DashboardView()
         {
             InitializeComponent();
+            PagesNavigation.Navigate(new OrderCreationPage());
             txblName.Text = CurrentUser.GetFullName();
-            if (CurrentUser.EmployeeId != 1)
+            if (CurrentUser.PositionId != 2)
             {
                 rdBtnEmployeeManagement.Visibility = Visibility.Collapsed;
             }
+            StartClock();
+        }
+        private void StartClock()
+        {
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
         }
 
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            DateTimeTextBlock.Text = DateTime.Now.ToString("dd MMM yyyy HH:mm:ss");
+        }
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton radioButton = sender as RadioButton;
@@ -38,26 +54,26 @@ namespace CafeSisters.Views
             {
                 switch (radioButton.Content.ToString())
                 {
-                    case "Создать заказ":
+                    case "Создание заказа":
                         PagesNavigation.Navigate(new OrderCreationPage());
                         break;
                     case "Заказы":
-                        PagesNavigation.Navigate(new OrderCreationPage());
+                        PagesNavigation.Navigate(new OrderManagementPage());
                         break;
                     case "Меню":
-                        PagesNavigation.Navigate(new OrderCreationPage());
+                        PagesNavigation.Navigate(new MenuManagementPage());
                         break;
                     case "Продукты":
-                        PagesNavigation.Navigate(new OrderCreationPage());
+                        PagesNavigation.Navigate(new ProductManagementPage());
                         break;
                     case "Техническая карта":
-                        PagesNavigation.Navigate(new OrderCreationPage());
+                        PagesNavigation.Navigate(new RecipeManagementPage());
                         break;
                     case "Сотрудники":
-                        PagesNavigation.Navigate(new OrderCreationPage());
+                        PagesNavigation.Navigate(new EmployeeManagementPage());
                         break;
                     case "Кабинет":
-                        PagesNavigation.Navigate(new OrderCreationPage());
+                        PagesNavigation.Navigate(new PersonalAccountPage());
                         break;
                 }
             }
@@ -110,16 +126,17 @@ namespace CafeSisters.Views
             else RestoreWindow();
         }
 
-        private void LogOut_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
-        }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
+        }
+
+        private void RBtnClose_Checked(object sender, RoutedEventArgs e)
+        {
+            LoginView loginView = new LoginView();
+            loginView.Show();
+            this.Close();
         }
     }
 }

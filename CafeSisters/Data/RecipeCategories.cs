@@ -12,18 +12,18 @@ namespace CafeSisters.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductCategories
+    public partial class RecipeCategories
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProductCategories()
+        public RecipeCategories()
         {
-            this.Ingredients = new HashSet<Ingredients>();
+            this.Recipes = new HashSet<Recipes>();
         }
     
-        public int CategoryId { get; set; }
+        public int RecipeCategoryId { get; set; }
         public string CategoryName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ingredients> Ingredients { get; set; }
+        public virtual ICollection<Recipes> Recipes { get; set; }
     }
 }

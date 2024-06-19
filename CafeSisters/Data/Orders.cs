@@ -22,9 +22,9 @@ namespace CafeSisters.Data
     
         public int OrderId { get; set; }
         public int EmployeeId { get; set; }
-        public System.DateTime OrderDate { get; set; }
+        public Nullable<System.DateTime> OrderDate { get; set; }
         public int StatusId { get; set; }
-        public decimal TotalCost { get; set; }
+        public Nullable<decimal> TotalCost { get; set; }
     
         public virtual Employees Employees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -1,9 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
-    <PathGeometry x:Key="logo" Figures="M12,2L12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10C22,6.5,17.5,2,12,2z M17,12c0,2.8-2.2,5-5,5c-2.8,0-5-2.2-5-5c0-2.8,2.2-5,5-5C14.8,7,17,9.2,17,12L17,12z"/>
 
-    <!-- Menu Icons -->
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+    <PathGeometry x:Key="createOrder" Figures="M12 2C12.5523 2 13 2.44772 13 3V11H21C21.5523 11 22 11.4477 22 12C22 12.5523 21.5523 13 21 13H13V21C13 21.5523 12.5523 22 12 22C11.4477 22 11 21.5523 11 21V13H3C2.44772 13 2 12.5523 2 12C2 11.4477 2.44772 11 3 11H11V3C11 2.44772 11.4477 2 12 2Z"/>
+    <PathGeometry x:Key="orderList" Figures="M2 3C2 2.44772 2.44772 2 3 2H21C21.5523 2 22 2.44772 22 3V21C22 21.5523 21.5523 22 21 22H3C2.44772 22 2 21.5523 2 21V3ZM4 4V20H20V4H4ZM6 6H18V8H6V6ZM6 10H18V12H6V10ZM6 14H14V16H6V14ZM6 18H12V20H6V18Z"/>
+    <PathGeometry x:Key="orders" Figures="M3,7V6A3,3 0 0,1 6,3H18A3,3 0 0,1 21,6V7H19V6A1,1 0 0,0 18,5H6A1,1 0 0,0 5,6V7H3M6,4A2,2 0 0,0 4,6V8H7V7H17V8H20V6A2,2 0 0,0 18,4H6M5,9A1,1 0 0,1 6,10A1,1 0 0,1 5,11A1,1 0 0,1 4,10A1,1 0 0,1 5,9M18,9A1,1 0 0,1 19,10A1,1 0 0,1 18,11A1,1 0 0,1 17,10A1,1 0 0,1 18,9M7,12L8.5,14H15.5L17,12"/>
+    <PathGeometry x:Key="journal" Figures="M3 3H17C18.1046 3 19 3.89543 19 5V19C19 20.1046 18.1046 21 17 21H3C1.89543 21 1 20.1046 1 19V5C1 3.89543 1.89543 3 3 3ZM3 5V19H17V5H3ZM4 6H16V7H4V6ZM4 8H16V9H4V8ZM4 10H16V11H4V10ZM4 12H16V13H4V12ZM4 14H16V15H4V14ZM4 16H16V17H4V16ZM4 18H16V19H4V18Z"/>
+    <PathGeometry x:Key="halfOpenBook" Figures="M2 4C2 2.89543 2.89543 2 4 2H12C13.1046 2 14 2.89543 14 4V20C14 21.1046 13.1046 22 12 22H4C2.89543 22 2 21.1046 2 20V4ZM4 4V20H12V4H4ZM6 6H10V7H6V6ZM6 9H10V10H6V9ZM6 12H10V13H6V12ZM6 15H10V16H6V15ZM6 18H10V19H6V18ZM15 4C15 2.89543 15.8954 2 17 2H22C23.1046 2 24 2.89543 24 4V20C24 21.1046 23.1046 22 22 22H17C15.8954 22 15 21.1046 15 20V4ZM17 4V20H22V4H17Z"/>
+    <PathGeometry x:Key="technicalMap" Figures="M4 2H20C21.1046 2 22 2.89543 22 4V20C22 21.1046 21.1046 22 20 22H4C2.89543 22 2 21.1046 2 20V4C2 2.89543 2.89543 2 4 2ZM4 4V20H20V4H4ZM6 6H18V8H6V6ZM6 10H18V12H6V10ZM6 14H12V16H6V14ZM6 18H14V20H6V18ZM16 14H18V16H16V14ZM16 18H18V20H16V18Z"/>
     <PathGeometry x:Key="home" Figures="M10.5495 2.53189C11.3874 1.82531 12.6126 1.82531 13.4505 2.5319L20.2005 8.224C20.7074 8.65152 21 9.2809 21 9.94406V19.7468C21 20.7133 20.2165 21.4968 19.25 21.4968H15.75C14.7835 21.4968 14 20.7133 14 19.7468V14.2468C14 14.1088 13.8881 13.9968 13.75 13.9968H10.25C10.1119 13.9968 9.99999 14.1088 9.99999 14.2468V19.7468C9.99999 20.7133 9.2165 21.4968 8.25 21.4968H4.75C3.7835 21.4968 3 20.7133 3 19.7468V9.94406C3 9.2809 3.29255 8.65152 3.79952 8.224L10.5495 2.53189ZM12.4835 3.6786C12.2042 3.44307 11.7958 3.44307 11.5165 3.6786L4.76651 9.37071C4.59752 9.51321 4.5 9.72301 4.5 9.94406V19.7468C4.5 19.8849 4.61193 19.9968 4.75 19.9968H8.25C8.38807 19.9968 8.49999 19.8849 8.49999 19.7468V14.2468C8.49999 13.2803 9.2835 12.4968 10.25 12.4968H13.75C14.7165 12.4968 15.5 13.2803 15.5 14.2468V19.7468C15.5 19.8849 15.6119 19.9968 15.75 19.9968H19.25C19.3881 19.9968 19.5 19.8849 19.5 19.7468V9.94406C19.5 9.72301 19.4025 9.51321 19.2335 9.37071L12.4835 3.6786Z"/>
     <PathGeometry x:Key="headphones" Figures="M22 12V19C22 20.5977 20.7511 21.9037 19.1763 21.9949L19 22H16C15.4872 22 15.0645 21.614 15.0067 21.1166L15 21V15C15 14.4872 15.386 14.0645 15.8834 14.0067L16 14H20.5V12C20.5 7.30558 16.6944 3.5 12 3.5C7.30558 3.5 3.5 7.30558 3.5 12V14H8C8.55228 14 9 14.4477 9 15V21C9 21.5523 8.55228 22 8 22H5C3.34315 22 2 20.6569 2 19V12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12V19V12ZM7.5 15.5H3.5V19C3.5 19.8284 4.17157 20.5 5 20.5H7.5V15.5ZM20.5 15.5H16.5V20.5H19C19.7797 20.5 20.4204 19.9051 20.4931 19.1445L20.5 19V15.5Z"/>
     <PathGeometry x:Key="notebook" Figures="M2,2H18V22H2Z M4,4V20H16V4Z M4,6H16V8H4Z M4,10H16V12H4Z M4,14H16V16H4Z M4,18H16V20H4Z"/>
@@ -13,124 +19,18 @@
     <PathGeometry x:Key="assignments" Figures="M3,2H21V22H3Z M5,4H19V6H5Z M5,8H19V10H5Z M5,12H19V14H5Z M5,16H19V18H5Z M5,20H19V22H5Z M7,6L10,6 10,8 7,8 7,6Z M7,10L10,10 10,12 7,12 7,10Z M7,14L10,14 10,16 7,16 7,14Z"/>
     <PathGeometry x:Key="contracts" Figures="M4,2H16C16.5523,2 17,2.44772 17,3V21C17,21.5523 16.5523,22 16,22H4C3.44772,22 3,21.5523 3,21V3C3,2.44772 3.44772,2 4,2Z M4,4V20H16V4H4Z M6,6H10V8H6Z M6,10H14V12H6Z M6,14H12V16H6Z M6,18H14V20H6Z M12,18H14V20H12Z"/>
     <PathGeometry x:Key="help" Figures="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M13,17h-2v-2h2V17z M12,14c-0.55,0-1-0.45-1-1v-1c0-0.55,0.45-1,1-1s1-0.45,1-1s-0.45-1-1-1s-1,0.45-1,1H9c0-1.66,1.34-3,3-3s3,1.34,3,3c0,1.1-0.9,2-2,2c-0.55,0-1,0.45-1,1v1C13,13.55,12.55,14,12,14z"/>
-    <PathGeometry x:Key="logout" Figures="M10,2H14C15.1,2,16,2.9,16,4V8H14V4H10V20H14V16H16V20C16,21.1,15.1,22,14,22H10C8.9,22,8,21.1,8,20V4C8,2.9,8.9,2,10,2z M13.59,16.59L18.17,12L13.59,7.41L15,6L21,12L15,18L13.59,16.59z"/>
-
+    <PathGeometry x:Key="shoppingBasket" Figures="M8.5,3A1.5,1.5 0 0,0 7,4.5V6H4.5A1.5,1.5 0 0,0 3,7.5V8H2A2,2 0 0,0 0,10V20A2,2 0 0,0 2,22H22A2,2 0 0,0 24,20V10A2,2 0 0,0 22,8H20V7.5A1.5,1.5 0 0,0 18.5,6H16V4.5A1.5,1.5 0 0,0 14.5,3H8.5M4,8V10H20V8H4M5,12A1,1 0 0,1 6,13A1,1 0 0,1 5,14A1,1 0 0,1 4,13A1,1 0 0,1 5,12M19,12A1,1 0 0,1 20,13A1,1 0 0,1 19,14A1,1 0 0,1 18,13A1,1 0 0,1 19,12M7,15A1,1 0 0,1 8,16A1,1 0 0,1 7,17A1,1 0 0,1 6,16A1,1 0 0,1 7,15M17,15A1,1 0 0,1 18,16A1,1 0 0,1 17,17A1,1 0 0,1 16,16A1,1 0 0,1 17,15"/>
+    <PathGeometry x:Key="logout" Figures="M10,2H14C15.1,2 16,2.9 16,4V8H14V4H10V20H14V16H16V20C16,21.1 15.1,22 14,22H10C8.9,22 8,21.1 8,20V4C8,2.9 8.9,2 10,2ZM14,11H7.414L9.707,8.707L8.293,7.293L4,11.586L8.293,15.879L9.707,14.465L7.414,12.172H14V11Z"/>
+    <PathGeometry x:Key="products" Figures="M4,10 L4,20 L20,20 L20,10 L4,10 Z M2,8 L6,4 L18,4 L22,8 L2,8 Z M8,14 C7.44772,14 7,14.4477 7,15 C7,15.5523 7.44772,16 8,16 C8.55228,16 9,15.5523 9,15 C9,14.4477 8.55228,14 8,14 Z M12,14 C11.4477,14 11,14.4477 11,15 C11,15.5523 11.4477,16 12,16 C12.5523,16 13,15.5523 13,15 C13,14.4477 12.5523,14 12,14 Z M16,14 C15.4477,14 15,14.4477 15,15 C15,15.5523 15.4477,16 16,16 C16.5523,16 17,15.5523 17,15 C17,14.4477 16.5523,14 16,14 Z"/>
+    <PathGeometry x:Key="employees" Figures="M12,2 C10.3431,2 9,3.34315 9,5 C9,6.65685 10.3431,8 12,8 C13.6569,8 15,6.65685 15,5 C15,3.34315 13.6569,2 12,2 Z M7,10 C5.34315,10 4,11.3431 4,13 C4,14.6569 5.34315,16 7,16 C8.65685,16 10,14.6569 10,13 C10,11.3431 8.65685,10 7,10 Z M17,10 C15.3431,10 14,11.3431 14,13 C14,14.6569 15.3431,16 17,16 C18.6569,16 20,14.6569 20,13 C20,11.3431 18.6569,10 17,10 Z M7,18 C4.79086,18 3,19.7909 3,22 L5,22 C5,20.8954 5.89543,20 7,20 C8.10457,20 9,20.8954 9,22 L11,22 C11,19.7909 9.20914,18 7,18 Z M17,18 C14.7909,18 13,19.7909 13,22 L15,22 C15,20.8954 15.8954,20 17,20 C18.1046,20 19,20.8954 19,22 L21,22 C21,19.7909 19.2091,18 17,18 Z"/>
+    <PathGeometry x:Key="employeeAccount" Figures="M12,2 C10.3431,2 9,3.34315 9,5 C9,6.65685 10.3431,8 12,8 C13.6569,8 15,6.65685 15,5 C15,3.34315 13.6569,2 12,2 Z M12,10 C9.79086,10 8,11.7909 8,14 L8,16 C8,16.5523 8.44772,17 9,17 L15,17 C15.5523,17 16,16.5523 16,16 L16,14 C16,11.7909 14.2091,10 12,10 Z"/>
 
 
     <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
     <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
     <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
     
-    <Style x:Key="CustomPasswordBoxStyle" TargetType="{x:Type PasswordBox}">
-        <Setter Property="PasswordChar" Value="●"/>
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderBrush" Value="Gray"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="#959697"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="AllowDrop" Value="true"/>
-        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type PasswordBox}">
-                    <Grid>
-                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
-                            <Grid Margin="10,0,0,0">
-                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                            </Grid>
-                        </Border>
-                    </Grid>
-
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
-                        </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
-                    <Condition Property="IsSelectionActive" Value="false"/>
-                </MultiTrigger.Conditions>
-                <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
-            </MultiTrigger>
-        </Style.Triggers>
-    </Style>
-    <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderBrush" Value="Gray"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="10,5"/>
-        <Setter Property="Margin" Value="5"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Foreground" Value="#959697"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
-                    <Grid>
-                        <Border Background="{TemplateBinding Background}" 
-                        BorderBrush="{TemplateBinding BorderBrush}" 
-                        BorderThickness="{TemplateBinding BorderThickness}" 
-                        CornerRadius="10">
-                            <ScrollViewer x:Name="PART_ContentHost"/>
-                        </Border>
-                        <TextBlock x:Name="PlaceholderTextBlock"
-                           Text="{Binding Tag, RelativeSource={RelativeSource AncestorType=TextBox}}"
-                           Foreground="Gray"
-                           Margin="10,0,0,0"
-                           VerticalAlignment="Center"
-                           IsHitTestVisible="False"
-                           Visibility="Collapsed"/>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="Text" Value="">
-                            <Setter TargetName="PlaceholderTextBlock" Property="Visibility" Value="Visible"/>
-                        </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter TargetName="PlaceholderTextBlock" Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="CustomButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="#fccc3c"/>
-        <Setter Property="Foreground" Value="#959697"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="FontFamily" Value="Montserrat"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="15">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#ebde34"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
+    
     <Style x:Key="MenuIconStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Width" Value="30"/>
         <Setter Property="Height" Value="30"/>
@@ -167,10 +67,11 @@
 
     <Style x:Key="MenuRadioButtonStyle" TargetType="{x:Type RadioButton}">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource ColorpPeach}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryColor}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Verdana"/>
         <Setter Property="Height" Value="40"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -196,15 +97,15 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="txtName" Property="Foreground" Value="{DynamicResource ActiveColorpPeach}"/>
-                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource ActiveColorpPeach}"/>
+                            <Setter TargetName="txtName" Property="Foreground" Value="{DynamicResource ColorMenu}"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource ColorMenu}"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource ActiveColorpPeach}"/>
-                            <Setter TargetName="Indicator" Property="Fill" Value="{DynamicResource ActiveColorpPeach}"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource ColorMenu}"/>
+                            <Setter TargetName="Indicator" Property="Fill" Value="{DynamicResource ColorMenu}"/>
                             <Setter TargetName="Indicator" Property="Height" Value="20"/>
-                            <Setter TargetName="btnSelected" Property="Background" Value="{DynamicResource SecundaryGrayColor}"/>
-                            <Setter TargetName="txtName" Property="Foreground" Value="{DynamicResource ActiveColorpPeach}"/>
+                            <Setter TargetName="btnSelected" Property="Background" Value="#C6DED8"/>
+                            <Setter TargetName="txtName" Property="Foreground" Value="{DynamicResource ColorMenu}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -282,28 +183,26 @@
         <Setter Property="Opacity" Value="0.7"/>
     </Style>
 
-
+    <SolidColorBrush x:Key="ColorMenu" Color="#89cbb7"/>
+    
     <SolidColorBrush x:Key="ActiveColorpPeach" Color="#e4ce9a"/>
     <SolidColorBrush x:Key="ColorpPeach" Color="#fee5ac"/>
     <SolidColorBrush x:Key="SecundaryBackgroundColor" Color="#f9f9f9"/>
-
+    <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#f3f3f3"/>
+    <SolidColorBrush x:Key="ActivePrimaryBackgroundColor" Color="#AAAAAA"/>
     <SolidColorBrush x:Key="TextPrimaryColor" Color="#575959"/>
 
 
     <SolidColorBrush x:Key="ColorViolet" Color="#9496EC"/>
-    <SolidColorBrush x:Key="ColorPink" Color="#ED89D1"/>
-    <SolidColorBrush x:Key="ColorButton" Color="#7701FF"/>
     <SolidColorBrush x:Key="ColorLightPink" Color="#101828"/>
-    <SolidColorBrush x:Key="ColorPinkMouseOver" Color="#D99CF5"/>
     <SolidColorBrush x:Key="ColorText" Color="#101828"/>
-    <SolidColorBrush x:Key="ColorLogInBorder" Opacity="0.5" Color="#101829"/>
     <SolidColorBrush x:Key="ColorButtonPressed" Color="#5F00CD"/>
     <LinearGradientBrush x:Key="GradientBackgroundBrush" StartPoint="0.5,0" EndPoint="0.5,1">
         <GradientStop Color="#DDF7F1" Offset="0"/>
         <GradientStop Color="#DDF7F1" Offset="0.75"/>
         <GradientStop Color="#DDF7F1" Offset="1"/>
     </LinearGradientBrush>
-    <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#f3f3f3"/>
+
     <SolidColorBrush x:Key="PrimaryBlueColor" Color="#5B7FFF"/>
     <SolidColorBrush x:Key="PrimaryGrayColor" Color="#BFBFC4"/>
     <SolidColorBrush x:Key="SecundaryBlueColor" Color="#CEE8FB"/>
@@ -594,6 +493,193 @@
                 <Setter Property="Template" Value="{StaticResource ComboBoxEditableTemplate}"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+    <Style x:Key="OptionMarkFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="14,0,0,0" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <SolidColorBrush x:Key="Button.Default.Background" Color="#fff"/>
+    <SolidColorBrush x:Key="Button.Default.Border" Color="#ccc"/>
+    <SolidColorBrush x:Key="Button.Hover.Background" Color="#fee5ac"/>
+    <SolidColorBrush x:Key="Button.Hover.Border" Color="#e4ce9a"/>
+    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#e4ce9a"/>
+    <SolidColorBrush x:Key="Button.Pressed.Border" Color="#d1bb83"/>
+    <SolidColorBrush x:Key="Button.Checked.Background" Color="#e4ce9a"/>
+    <SolidColorBrush x:Key="Button.Checked.Border" Color="#d1bb83"/>
+    <SolidColorBrush x:Key="Button.Disabled.Background" Color="#f5f5f5"/>
+    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#ddd"/>
+
+    <Style x:Key="CustomCheckBoxStyle" TargetType="{x:Type CheckBox}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource Button.Default.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Button.Default.Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                        <Border x:Name="checkBoxBorder" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="15" 
+                            Width="100" 
+                            Height="40" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center">
+                            <ContentPresenter x:Name="contentPresenter" 
+                                              Content="{TemplateBinding Content}" 
+                                              HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource Button.Hover.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource Button.Hover.Border}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource Button.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource Button.Pressed.Border}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource Button.Checked.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource Button.Checked.Border}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource Button.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource Button.Disabled.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CustomButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource ActiveColorpPeach}"/>
+        <Setter Property="Foreground" Value="#959697"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="15">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#C9B993"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#e4ce9a"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#f5f5f5"/>
+                <Setter Property="Foreground" Value="#ddd"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CustomPasswordBoxStyle" TargetType="{x:Type PasswordBox}">
+        <Setter Property="PasswordChar" Value="●"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="#959697"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Grid>
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                            <Grid Margin="10,0,0,0">
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                    <Condition Property="IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#959697"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="10">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                        <TextBlock x:Name="PlaceholderTextBlock"
+                           Text="{Binding Tag, RelativeSource={RelativeSource AncestorType=TextBox}}"
+                           Foreground="Gray"
+                           Margin="10,0,0,0"
+                           VerticalAlignment="Center"
+                           IsHitTestVisible="False"
+                           Visibility="Collapsed"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="PlaceholderTextBlock" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="PlaceholderTextBlock" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>
