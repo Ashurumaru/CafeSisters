@@ -107,7 +107,7 @@
         <StackPanel HorizontalAlignment="Left" Orientation="Vertical" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" Margin="10">
             <CheckBox Style="{DynamicResource CustomCheckBoxStyle}"  x:Name="StopListCheckBox"  Content="Стоп-лист" Margin="10" Checked="StopListCheckBox_Checked" Unchecked="StopListCheckBox_Unchecked"/>
             <CheckBox Style="{DynamicResource CustomCheckBoxStyle}"  x:Name="MenuTypeCheckBox" Content="Тип меню" Margin="10" Checked="MenuTypeCheckBox_Checked" Unchecked="MenuTypeCheckBox_Unchecked"/>
-            <CheckBox Style="{DynamicResource CustomCheckBoxStyle}"  x:Name="CheckPrintingCheckBox" Content="Печать чека" Margin="10" Checked="MenuTypeCheckBox_Checked" Unchecked="MenuTypeCheckBox_Unchecked"/>
+            <CheckBox Style="{DynamicResource CustomCheckBoxStyle}"  x:Name="CheckPrintingCheckBox" Content="Печать" Margin="10" Checked="MenuTypeCheckBox_Checked" Unchecked="MenuTypeCheckBox_Unchecked"/>
         </StackPanel>
     </Grid>
 </Page>

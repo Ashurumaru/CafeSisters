@@ -6,9 +6,73 @@
       xmlns:local="clr-namespace:CafeSisters.Views.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PersonalAccountPage">
+Title="Личный кабинет">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Личные данные -->
+        <StackPanel Orientation="Vertical" Margin="10" Grid.Column="0">
+            <TextBlock Text="Личные данные" FontWeight="Bold" FontSize="16" Margin="5"/>
+            <TextBlock Text="Имя" Margin="5"/>
+            <TextBox x:Name="FirstNameTextBox" Width="300" Margin="5" Style="{DynamicResource CustomTextBoxStyle}"/>
+            <TextBlock Text="Отчество" Margin="5"/>
+            <TextBox x:Name="PatronymicTextBox" Width="300" Margin="5" Style="{DynamicResource CustomTextBoxStyle}"/>
+            <TextBlock Text="Фамилия" Margin="5"/>
+            <TextBox x:Name="LastNameTextBox" Width="300" Margin="5" Style="{DynamicResource CustomTextBoxStyle}"/>
+            <TextBlock Text="Телефон" Margin="5"/>
+            <TextBox x:Name="PhoneTextBox" Width="300" Margin="5" Style="{DynamicResource CustomTextBoxStyle}"/>
+            <TextBlock Text="Логин" Margin="5"/>
+            <TextBox x:Name="LoginTextBox" Width="300" Margin="5" Style="{DynamicResource CustomTextBoxStyle}"/>
+            <TextBlock Text="Пароль" Margin="5"/>
+            <TextBox x:Name="PasswordTextBox" Width="300" Margin="5" Style="{DynamicResource CustomTextBoxStyle}"/>
+            <Button Content="Сохранить изменения" Click="SaveButton_Click" Style="{DynamicResource CustomButtonStyle}" Width="180" Margin="5"/>
+        </StackPanel>
+
+        <!-- Статистика заказов -->
+        <StackPanel Orientation="Vertical" Margin="10" Grid.Column="1">
+            <TextBlock Text="Статистика заказов" FontWeight="Bold" FontSize="16" Margin="5"/>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Фильтр по дате:" Margin="5"/>
+                <DatePicker x:Name="StartDatePicker" Width="150" Margin="5"/>
+                <TextBlock Text="до" Margin="5"/>
+                <DatePicker x:Name="EndDatePicker" Width="150" Margin="5"/>
+                <Button Content="Применить" Click="ApplyDateFilter_Click" Style="{DynamicResource CustomButtonStyle}" Width="100" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Фильтр по статусу:" Margin="5"/>
+                <ComboBox x:Name="StatusFilterComboBox" Width="200" Margin="5" DisplayMemberPath="StatusName" SelectedValuePath="StatusId"/>
+                <Button Content="Применить" Click="ApplyStatusFilter_Click" Style="{DynamicResource CustomButtonStyle}" Width="100" Margin="5"/>
+            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Background="Transparent" Margin="10" Height="500">
+                <ItemsControl x:Name="OrderStatisticsList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{DynamicResource ColorpPeach}" BorderBrush="{DynamicResource ActiveColorpPeach}" BorderThickness="1" CornerRadius="5" Margin="5">
+                                <StackPanel Margin="5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Заказ №" FontWeight="Bold" FontSize="14"/>
+                                        <TextBlock Text="{Binding OrderId}" FontWeight="Bold" FontSize="14"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding OrderDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}" FontWeight="Bold"/>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="Сумма: " FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding TotalCost, StringFormat={}{0:F2} ₽}" Margin="5 0 0 0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Статус: " FontWeight="Bold" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding StatusName}" Margin="5 0 0 0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
     </Grid>
 </Page>

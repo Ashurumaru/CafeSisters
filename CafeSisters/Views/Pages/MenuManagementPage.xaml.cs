@@ -36,11 +36,13 @@ namespace CafeSisters.Views.Pages
             allRecipes = _context.Recipes.ToList();
             RecipeList.ItemsSource = allRecipes;
         }
+
         private void LoadCategory()
         {
             var categories = _context.RecipeCategories.ToList();
             CategoryComboBox.ItemsSource = categories;
         }
+
         private void CreateMenu_Click(object sender, RoutedEventArgs e)
         {
             ClearForm();
@@ -215,9 +217,17 @@ namespace CafeSisters.Views.Pages
         private void FilterRecipes()
         {
             var searchText = SearchRecipeTextBox.Text.ToLower();
+            var selectedCategoryId = CategoryComboBox.SelectedValue as int?;
             var filteredRecipes = allRecipes
-                .Where(r => string.IsNullOrEmpty(searchText) || r.RecipeName.ToLower().Contains(searchText))
+                .Where(r => (string.IsNullOrEmpty(searchText) || r.RecipeName.ToLower().Contains(searchText)) &&
+                            (!selectedCategoryId.HasValue || r.RecipeCategoryId == selectedCategoryId.Value))
                 .ToList();
+
+            if (HideExistingRecipesCheckBox.IsChecked == true)
+            {
+                filteredRecipes = filteredRecipes.Where(r => !menuRecipes.Any(mr => mr.RecipeId == r.RecipeId)).ToList();
+            }
+
             RecipeList.ItemsSource = filteredRecipes;
         }
 
@@ -229,7 +239,24 @@ namespace CafeSisters.Views.Pages
 
         private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            FilterRecipes();
+        }
 
+        private void HideExistingRecipesCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            FilterRecipes();
+        }
+
+        private void HideExistingRecipesCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            FilterRecipes();
+        }
+        private void ResetFilters_Click(object sender, RoutedEventArgs e)
+        {
+            SearchRecipeTextBox.Text = string.Empty;
+            CategoryComboBox.SelectedIndex = -1;
+            HideExistingRecipesCheckBox.IsChecked = false;
+            FilterRecipes();
         }
     }
 }

@@ -1,0 +1,23 @@
+﻿<Page x:Class="CafeSisters.Views.Pages.Reports.AllOrdersReportPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CafeSisters.Views.Pages.Reports"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+Title="Отчет по всем заказам">
+
+    <Grid>
+        <StackPanel Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Отчет по всем заказам" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+            <TextBlock Text="Начальная дата:" FontWeight="Bold"/>
+            <DatePicker x:Name="StartDatePicker" Width="200" Margin="0,0,0,10"/>
+            <TextBlock Text="Конечная дата:" FontWeight="Bold"/>
+            <DatePicker x:Name="EndDatePicker" Width="200" Margin="0,0,0,10"/>
+            <TextBlock Text="ID сотрудника (опционально):" FontWeight="Bold"/>
+            <ComboBox x:Name="EmployeeComboBox" Width="200" Margin="0,0,0,10" DisplayMemberPath="FullName" SelectedValuePath="EmployeeId"/>
+            <Button Content="Сгенерировать отчет" Click="GenerateAllOrdersReport_Click" Style="{DynamicResource CustomButtonStyle}" Width="200"/>
+        </StackPanel>
+    </Grid>
+</Page>

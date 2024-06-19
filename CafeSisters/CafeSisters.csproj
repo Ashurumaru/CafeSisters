@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -59,6 +60,15 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Document.NET, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.3.0.0\lib\net40\Xceed.Document.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Pdf, Version=3.0.24152.12190, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Pdf.3.0.24152.1219\lib\net40\Xceed.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Words.NET, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.3.0.0\lib\net40\Xceed.Words.NET.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -137,6 +147,7 @@
     <Compile Include="Models\MenuRecipeItem.cs" />
     <Compile Include="Models\OrderItemItem.cs" />
     <Compile Include="Models\RecipeIngredientItem.cs" />
+    <Compile Include="Utils\ReportGenerator.cs" />
     <Compile Include="Views\Cards\AddIngredientCard.xaml.cs">
       <DependentUpon>AddIngredientCard.xaml</DependentUpon>
     </Compile>
@@ -173,6 +184,18 @@
     </Compile>
     <Compile Include="Views\Pages\ReportManagementPage.xaml.cs">
       <DependentUpon>ReportManagementPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Reports\AllDishesReportPage.xaml.cs">
+      <DependentUpon>AllDishesReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Reports\AllOrdersReportPage.xaml.cs">
+      <DependentUpon>AllOrdersReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Reports\MenuReportPage.xaml.cs">
+      <DependentUpon>MenuReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Reports\OrderReportPage.xaml.cs">
+      <DependentUpon>OrderReportPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Styles.xaml">
       <SubType>Designer</SubType>
@@ -219,6 +242,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\ReportManagementPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Reports\AllDishesReportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Reports\AllOrdersReportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Reports\MenuReportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Reports\OrderReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

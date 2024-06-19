@@ -35,7 +35,11 @@ namespace CafeSisters.Views.Pages
                     e.Positions.PositionName,
                     e.Phone,
                     e.Login,
-                    e.Password
+                    TotalRevenue = _context.Orders
+                        .Where(o => o.EmployeeId == e.EmployeeId)
+                        .Sum(o => o.TotalCost),
+                    OrderCount = _context.Orders
+                        .Count(o => o.EmployeeId == e.EmployeeId)
                 }).ToList();
 
             EmployeeList.ItemsSource = employees;
@@ -160,7 +164,12 @@ namespace CafeSisters.Views.Pages
                     FullName = e.FirstName + " " + e.Patronymic + " " + e.LastName,
                     e.Positions.PositionName,
                     e.Phone,
-                    e.Login
+                    e.Login,
+                    TotalRevenue = _context.Orders
+                        .Where(o => o.EmployeeId == e.EmployeeId)
+                        .Sum(o => o.TotalCost),
+                    OrderCount = _context.Orders
+                        .Count(o => o.EmployeeId == e.EmployeeId)
                 }).ToList();
 
             EmployeeList.ItemsSource = filteredEmployees;

@@ -45,6 +45,15 @@
                                     <TextBlock Text="{Binding Password}" Margin="5 0 0 0" VerticalAlignment="Center"/>
 
                                 </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Количество заказов: " FontWeight="Bold" Margin="0,0,0,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding OrderCount}" Margin="5 0 0 0" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Выручка: " FontWeight="Bold" Margin="0,0,0,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding TotalRevenue, StringFormat={}{0:F2} ₽}" Margin="5 0 0 0" VerticalAlignment="Center"/>
+                                </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,10,5,0">
                                     <Button Content="Редактировать" Click="EditEmployee_Click" Style="{DynamicResource CustomButtonStyle}" CommandParameter="{Binding EmployeeId}" Width="150"/>
                                     <Button Content="Удалить" Click="DeleteEmployee_Click" Style="{DynamicResource CustomButtonStyle}" CommandParameter="{Binding EmployeeId}" Width="80" Margin="5,0,0,0"/>

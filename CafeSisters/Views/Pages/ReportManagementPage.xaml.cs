@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CafeSisters.Views.Pages.Reports;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,25 @@ namespace CafeSisters.Views.Pages
         public ReportManagementPage()
         {
             InitializeComponent();
+        }
+        private void NavigateToOrderReportPage(object sender, RoutedEventArgs e)
+        {
+            ReportContentFrame.Navigate(new OrderReportPage());
+        }
+
+        private void NavigateToAllOrdersReportPage(object sender, RoutedEventArgs e)
+        {
+            ReportContentFrame.Navigate(new AllOrdersReportPage());
+        }
+
+        private void NavigateToMenuReportPage(object sender, RoutedEventArgs e)
+        {
+            ReportContentFrame.Navigate(new MenuReportPage());
+        }
+
+        private void NavigateToAllDishesReportPage(object sender, RoutedEventArgs e)
+        {
+            ReportContentFrame.Navigate(new AllDishesReportPage());
         }
     }
 }

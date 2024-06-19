@@ -59,6 +59,7 @@
                         <RadioButton x:Name="rdBtnRecipeManagement" Content="Техническая карта" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource technicalMap}" Margin="0 5 0 5" Checked="RadioButton_Checked"/>
                         <RadioButton x:Name="rdBtnEmployeeManagement" Content="Сотрудники" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource employees}" Margin="0 5 0 5" Checked="RadioButton_Checked"/>
                         <RadioButton x:Name="rdBtnPersonalAccount" Content="Кабинет" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource employeeAccount}" Margin="0 5 0 5" Checked="RadioButton_Checked"/>
+                        <RadioButton x:Name="rdBtnReportManagement" Content="Отчеты" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource orderList}" Margin="0 5 0 5" Checked="RadioButton_Checked"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom" Margin="0 0 0 80">

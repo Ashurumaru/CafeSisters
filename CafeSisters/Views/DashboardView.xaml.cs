@@ -75,6 +75,9 @@ namespace CafeSisters.Views
                     case "Кабинет":
                         PagesNavigation.Navigate(new PersonalAccountPage());
                         break;
+                    case "Отчеты":
+                        PagesNavigation.Navigate(new ReportManagementPage());
+                        break;
                 }
             }
         }

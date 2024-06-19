@@ -18,7 +18,7 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.ColumnSpan="4" Grid.Row="0" Grid.Column="0"  Name="TopPanel">
+        <Grid Grid.ColumnSpan="4" Grid.Row="0" Grid.Column="0" Name="TopPanel">
             <Button x:Name="btnCreateMenu" Content="Создать меню" Click="CreateMenu_Click" HorizontalAlignment="Left" Margin="5 5 5 20" Style="{DynamicResource CustomButtonStyle}" Width="120"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="SearchMenuTextBox" Width="200" TextChanged="SearchMenuTextBox_TextChanged" Tag="Поиск" HorizontalAlignment="Right" Style="{DynamicResource CustomTextBoxStyle}" Margin="5 5 5 20" />
@@ -56,10 +56,31 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="0" HorizontalAlignment="Center">
-                <TextBlock Style="{DynamicResource StandartText}" VerticalAlignment="Center" Text="Название меню" Margin="5,5" />
-                <TextBox Style="{DynamicResource CustomTextBoxStyle}" x:Name="MenuNameTextBox" Margin="10,5" Width="200"/>
-            </StackPanel>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Style="{DynamicResource StandartText}" VerticalAlignment="Center" Text="Название меню" Margin="5,5" />
+                <TextBox Grid.Row="1" Grid.Column="0" Style="{DynamicResource CustomTextBoxStyle}" x:Name="MenuNameTextBox" Margin="10,5" Width="200"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" Style="{DynamicResource StandartText}" Text="Фильтр по категории:" VerticalAlignment="Center" Margin="5,5"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" Style="{DynamicResource CustomComboBoxStyle}" x:Name="CategoryComboBox" Width="150" Margin="10,5" SelectionChanged="CategoryComboBox_SelectionChanged" DisplayMemberPath="CategoryName" SelectedValuePath="RecipeCategoryId" />
+
+                <TextBlock Grid.Row="0" Grid.Column="2" Style="{DynamicResource StandartText}" Text="Все блюда" VerticalAlignment="Center" Margin="5,5"/>
+                <TextBox Grid.Row="1" Grid.Column="2" Style="{DynamicResource CustomTextBoxStyle}" x:Name="SearchRecipeTextBox" Width="150" Margin="10,5" TextChanged="SearchRecipeTextBox_TextChanged"/>
+
+                <CheckBox Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Style="{DynamicResource CustomCheckBoxStyle}" x:Name="HideExistingRecipesCheckBox" Content="Скрыть блюда" Margin="10,5" Checked="HideExistingRecipesCheckBox_Checked" Unchecked="HideExistingRecipesCheckBox_Unchecked"/>
+
+                <Button Grid.Row="1" Grid.Column="4" Content="Сбросить фильтры" Click="ResetFilters_Click" Style="{DynamicResource CustomButtonStyle}" Width="120" Margin="10,5"/>
+            </Grid>
 
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="20 0 10 10">
                 <TextBlock Style="{DynamicResource StandartText}" Text="Блюда в меню" Margin="0 20 0 5" />
@@ -79,20 +100,7 @@
                 </ScrollViewer>
             </StackPanel>
 
-            <StackPanel Grid.Row="0" Orientation="Vertical" Grid.Column="1" Grid.RowSpan="2"  Margin="0 0 10 10">
-                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" >
-                    <StackPanel Orientation="Vertical"  HorizontalAlignment="Center">
-                        <TextBlock Style="{DynamicResource StandartText}" Text="Все блюда"  VerticalAlignment="Top"/>
-                        <TextBox Style="{DynamicResource CustomTextBoxStyle}" VerticalAlignment="Top"  x:Name="SearchRecipeTextBox" Width="150" TextChanged="SearchRecipeTextBox_TextChanged"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical"  HorizontalAlignment="Center">
-                        <TextBlock Text="Фильтр по категории:" Style="{DynamicResource StandartText}" VerticalAlignment="Top"/>
-                        <ComboBox x:Name="CategoryComboBox" Width="150" VerticalAlignment="Bottom" SelectionChanged="CategoryComboBox_SelectionChanged" DisplayMemberPath="CategoryName" SelectedValuePath="RecipeCategoryId" />
-                    </StackPanel>
-                </StackPanel>
-
-
-
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 0 10 10">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Background="Transparent" Height="500">
                     <ItemsControl x:Name="RecipeList">
                         <ItemsControl.ItemTemplate>

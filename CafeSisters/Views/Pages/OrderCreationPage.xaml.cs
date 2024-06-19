@@ -2,28 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using CafeSisters.Models;
+using CafeSisters.Utils;
 
 namespace CafeSisters.Views.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для OrderCreationPage.xaml
-    /// </summary>
     public partial class OrderCreationPage : Page
     {
         private CafeSistersEntities _context;
-        private List<CartItem> _cartItems; 
+        private List<CartItem> _cartItems;
 
         public OrderCreationPage()
         {
@@ -49,7 +38,7 @@ namespace CafeSisters.Views.Pages
                 MenuComboBox.SelectedIndex = 0;
         }
 
-        private  void LoadCategory()
+        private void LoadCategory()
         {
             var categories = _context.RecipeCategories.ToList();
             CategoryComboBox.ItemsSource = categories;
@@ -103,11 +92,11 @@ namespace CafeSisters.Views.Pages
             CartItemsControl.ItemsSource = _cartItems;
 
             var totalCost = _cartItems.Sum(ci => ci.TotalCost);
-            TotalCostTextBlock.Text = totalCost.ToString("C");
+            TotalCostTextBlock.Text = $"{totalCost:F2} ₽";
 
             var totalItems = _cartItems.Sum(ci => ci.Quantity);
             TotalItemsTextBlock.Text = totalItems.ToString();
-            TotalCostTextBlockMain.Text = totalCost.ToString("C");
+            TotalCostTextBlockMain.Text = $"{totalCost:F2} ₽";
         }
 
         private void PlaceOrder_Click(object sender, RoutedEventArgs e)
@@ -118,7 +107,7 @@ namespace CafeSisters.Views.Pages
                 {
                     var order = new Orders
                     {
-                        EmployeeId = CurrentUser.EmployeeId, 
+                        EmployeeId = CurrentUser.EmployeeId,
                         OrderDate = DateTime.Now,
                         StatusId = 1,
                         TotalCost = _cartItems.Sum(ci => ci.TotalCost)
@@ -149,6 +138,10 @@ namespace CafeSisters.Views.Pages
                     _context.SaveChanges();
                     transaction.Commit();
                     MessageBox.Show("Заказ успешно оформлен!");
+                    if (CheckPrintingCheckBox.IsChecked == true)
+                    {
+                        ReportGenerator.GenerateOrderReport(order.OrderId);
+                    }
 
                     _cartItems.Clear();
                     UpdateCart();
@@ -222,6 +215,12 @@ namespace CafeSisters.Views.Pages
                     .ToList();
             }
 
+            if (CategoryComboBox.SelectedValue != null)
+            {
+                var selectedCategoryId = (int)CategoryComboBox.SelectedValue;
+                menuRecipes = menuRecipes.Where(mr => _context.Recipes.Any(r => r.RecipeId == mr.RecipeId && r.RecipeCategoryId == selectedCategoryId)).ToList();
+            }
+
             if (StopListCheckBox.IsChecked == true)
             {
                 var availableRecipes = menuRecipes.Where(r => CheckIngredientsAvailability(r.RecipeId)).ToList();
@@ -232,8 +231,6 @@ namespace CafeSisters.Views.Pages
                 MenuItemsControl.ItemsSource = menuRecipes;
             }
         }
-
-
 
         private bool CheckIngredientsAvailability(int recipeId)
         {
@@ -252,11 +249,6 @@ namespace CafeSisters.Views.Pages
         private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateMenuWithStopList();
-        }
-
-        private void CategoryComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
