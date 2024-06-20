@@ -11,7 +11,7 @@
     <Grid>
         <StackPanel Margin="20">
             <TextBlock Text="Выберите меню" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500">
                 <ItemsControl x:Name="MenuList">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

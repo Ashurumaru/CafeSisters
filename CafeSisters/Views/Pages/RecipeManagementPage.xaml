@@ -16,15 +16,13 @@
         <Grid VerticalAlignment="Top" Name="TopPanel">
             <StackPanel Orientation="Horizontal" >
                 <Button x:Name="btnCreateRecipe" Content="Создать рецепт" Click="CreateRecipe_Click" HorizontalAlignment="Left" Margin="5 5 5 20" Style="{DynamicResource CustomButtonStyle}" Width="150"/>
-
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="Фильтр по категории:" Style="{DynamicResource StandartText}" VerticalAlignment="Center"/>
-                <ComboBox x:Name="CategoryRecipeComboBox" Width="150" SelectionChanged="CategoryComboBox_SelectionChanged" DisplayMemberPath="CategoryName" SelectedValuePath="RecipeCategoryId" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="5"/>
-                    <TextBox x:Name="SearchRecipeTextBox" Width="200" TextChanged="SearchRecipeTextBox_TextChanged" Tag="Поиск" HorizontalAlignment="Right" Style="{DynamicResource CustomTextBoxStyle}" Margin="5 5 5 20"/>
+                <TextBlock Text="Фильтр по категории:" Style="{DynamicResource StandartText}" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CategoryRecipeComboBox" Width="150" SelectionChanged="CategoryRecipeComboBox_SelectionChanged" DisplayMemberPath="CategoryName" SelectedValuePath="RecipeCategoryId" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="5"/>
+                <TextBox x:Name="SearchRecipeTextBox" Width="200" TextChanged="SearchRecipeTextBox_TextChanged" Tag="Поиск" HorizontalAlignment="Right" Style="{DynamicResource CustomTextBoxStyle}" Margin="5 5 5 20"/>
                 <Button x:Name="btnResetRecipeSearch" Content="Сбросить" Click="ResetRecipeSearch_Click" HorizontalAlignment="Right" Margin="5 5 5 20" Style="{DynamicResource CustomButtonStyle}" Width="80"/>
             </StackPanel>
-
         </Grid>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Background="Transparent" Margin="0 0 0 0">
             <ItemsControl x:Name="RecipeList">
@@ -58,8 +56,7 @@
                                 </StackPanel>
                             </Grid>
                         </Border>
-                        </DataTemplate>
-
+                    </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
@@ -116,9 +113,8 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="SearchIngredientTextBox" Width="150" Margin="5" Style="{DynamicResource CustomTextBoxStyle}" TextChanged="SearchIngredientTextBox_TextChanged"/>
                     <ComboBox x:Name="CategoryFilterComboBox" Width="150" Margin="5" SelectionChanged="CategoryFilterComboBox_SelectionChanged" DisplayMemberPath="CategoryName" SelectedValuePath="CategoryId"/>
-
                 </StackPanel>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="480">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="480">
                     <ItemsControl x:Name="IngredientList">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -129,7 +125,6 @@
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
-
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>

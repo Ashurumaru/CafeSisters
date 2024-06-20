@@ -15,7 +15,7 @@ Title="Отчет по всем заказам">
             <DatePicker x:Name="StartDatePicker" Width="200" Margin="0,0,0,10"/>
             <TextBlock Text="Конечная дата:" FontWeight="Bold"/>
             <DatePicker x:Name="EndDatePicker" Width="200" Margin="0,0,0,10"/>
-            <TextBlock Text="ID сотрудника (опционально):" FontWeight="Bold"/>
+            <TextBlock Text="Сотрудник (опционально):" FontWeight="Bold"/>
             <ComboBox x:Name="EmployeeComboBox" Width="200" Margin="0,0,0,10" DisplayMemberPath="FullName" SelectedValuePath="EmployeeId"/>
             <Button Content="Сгенерировать отчет" Click="GenerateAllOrdersReport_Click" Style="{DynamicResource CustomButtonStyle}" Width="200"/>
         </StackPanel>

@@ -6,9 +6,10 @@ using Xceed.Words.NET;
 using CafeSisters.Data;
 using System.Windows.Controls;
 using System.Data.Entity;
-    using System.Drawing;
+using System.Drawing;
 using Microsoft.Win32;
 using System.Diagnostics;
+
 namespace CafeSisters.Utils
 {
     public static class ReportGenerator
@@ -84,7 +85,6 @@ namespace CafeSisters.Utils
                 doc.Save();
             }
             Process.Start("explorer.exe", filePath);
-
         }
 
         public static void GenerateAllOrdersReport(DateTime? startDate, DateTime? endDate, int? employeeId)
@@ -214,16 +214,25 @@ namespace CafeSisters.Utils
                 doc.Save();
             }
         }
-    
 
-public static void GenerateMenuReport(int menuId)
+
+        public static void GenerateMenuReport(int menuId)
         {
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Word Document (*.docx)|*.docx",
+                Title = "Сохранить отчет по меню",
+                FileName = $"MenuReport_{menuId}.docx"
+            };
+
+            if (saveFileDialog.ShowDialog() != true) return;
+
+            var filePath = saveFileDialog.FileName;
 
             using (var context = new CafeSistersEntities())
             {
                 var menu = context.Menus
-                    .Include("MenuRecipes")
-                    .Include("MenuRecipes.Recipes")
+                    .Include(m => m.MenuRecipes.Select(mr => mr.Recipes.RecipeIngredients.Select(ri => ri.Ingredients.NutritionalValues)))
                     .FirstOrDefault(m => m.MenuId == menuId);
 
                 if (menu == null)
@@ -231,64 +240,159 @@ public static void GenerateMenuReport(int menuId)
                     throw new Exception("Menu not found.");
                 }
 
-                var doc = DocX.Create($"MenuReport_{menuId}.docx");
-                doc.InsertParagraph($"Отчет по меню: {menu.MenuName}")
-                    .FontSize(20)
-                    .Bold()
-                    .Alignment = Alignment.center;
-
-                foreach (var menuRecipe in menu.MenuRecipes)
+                using (var doc = DocX.Create(filePath))
                 {
-                    var recipe = menuRecipe.Recipes;
-
-                    doc.InsertParagraph($"{recipe.RecipeName}")
-                        .FontSize(16)
+                    doc.InsertParagraph($"Отчет по меню: {menu.MenuName}")
+                        .FontSize(20)
                         .Bold()
-                        .SpacingAfter(5);
+                        .Alignment = Alignment.center;
 
-                    doc.InsertParagraph($"Цена: {recipe.Cost} руб.")
-                        .FontSize(14)
-                        .SpacingAfter(2);
+                    foreach (var menuRecipe in menu.MenuRecipes)
+                    {
+                        var recipe = menuRecipe.Recipes;
 
-                    doc.InsertParagraph($"Инструкция: {recipe.Instruction}")
-                        .FontSize(12)
-                        .SpacingAfter(10);
+                        doc.InsertParagraph($"{recipe.RecipeName}")
+                            .FontSize(16)
+                            .Bold()
+                            .SpacingAfter(5);
+
+                        doc.InsertParagraph($"Цена: {recipe.Cost:F2} руб.")
+                            .FontSize(14)
+                            .SpacingAfter(2);
+
+                        doc.InsertParagraph($"Инструкция: {recipe.Instruction}")
+                            .FontSize(12)
+                            .SpacingAfter(10);
+
+                        var totalProteins = recipe.RecipeIngredients.Sum(ri => (ri.Ingredients.NutritionalValues.FirstOrDefault()?.Proteins ?? 0) * ri.Quantity);
+                        var totalFats = recipe.RecipeIngredients.Sum(ri => (ri.Ingredients.NutritionalValues.FirstOrDefault()?.Fats ?? 0) * ri.Quantity);
+                        var totalCarbohydrates = recipe.RecipeIngredients.Sum(ri => (ri.Ingredients.NutritionalValues.FirstOrDefault()?.Carbohydrates ?? 0) * ri.Quantity);
+                        var totalEnergyValue = recipe.RecipeIngredients.Sum(ri => (ri.Ingredients.NutritionalValues.FirstOrDefault()?.EnergyValue ?? 0) * ri.Quantity);
+
+                        doc.InsertParagraph($"Пищевая ценность на порцию:")
+                            .FontSize(12)
+                            .SpacingAfter(2);
+
+                        var nutritionTable = doc.AddTable(4, 2);
+                        nutritionTable.Design = TableDesign.TableGrid;
+                        nutritionTable.Rows[0].Cells[0].Paragraphs.First().Append("Белки").Bold();
+                        nutritionTable.Rows[0].Cells[1].Paragraphs.First().Append($"{totalProteins:F2} г");
+                        nutritionTable.Rows[1].Cells[0].Paragraphs.First().Append("Жиры").Bold();
+                        nutritionTable.Rows[1].Cells[1].Paragraphs.First().Append($"{totalFats:F2} г");
+                        nutritionTable.Rows[2].Cells[0].Paragraphs.First().Append("Углеводы").Bold();
+                        nutritionTable.Rows[2].Cells[1].Paragraphs.First().Append($"{totalCarbohydrates:F2} г");
+                        nutritionTable.Rows[3].Cells[0].Paragraphs.First().Append("Энергетическая ценность").Bold();
+                        nutritionTable.Rows[3].Cells[1].Paragraphs.First().Append($"{totalEnergyValue:F2} ккал");
+                        doc.InsertTable(nutritionTable);
+
+                        doc.InsertParagraph().SpacingAfter(10);
+                    }
+
+                    doc.Save();
                 }
-
-                doc.Save();
             }
+
+            Process.Start("explorer.exe", filePath);
         }
+
+
 
         public static void GenerateAllDishesReport()
         {
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Word Document (*.docx)|*.docx",
+                Title = "Сохранить отчет по всем блюдам",
+                FileName = "AllDishesReport.docx"
+            };
+
+            if (saveFileDialog.ShowDialog() != true) return;
+
+            var filePath = saveFileDialog.FileName;
+
             using (var context = new CafeSistersEntities())
             {
-                var recipes = context.Recipes.ToList();
+                var recipes = context.Recipes
+                    .Include(r => r.RecipeIngredients.Select(ri => ri.Ingredients.NutritionalValues))
+                    .ToList();
 
-                var doc = DocX.Create("AllDishesReport.docx");
-                doc.InsertParagraph("Отчет по всем блюдам")
-                    .FontSize(20)
-                    .Bold()
-                    .Alignment = Alignment.center;
-
-                foreach (var recipe in recipes)
+                using (var doc = DocX.Create(filePath))
                 {
-                    doc.InsertParagraph($"{recipe.RecipeName}")
-                        .FontSize(16)
+                    doc.InsertParagraph("Отчет по всем блюдам")
+                        .FontSize(20)
                         .Bold()
-                        .SpacingAfter(5);
+                        .Alignment = Alignment.center;
 
-                    doc.InsertParagraph($"Цена: {recipe.Cost} руб.")
-                        .FontSize(14)
-                        .SpacingAfter(2);
+                    foreach (var recipe in recipes)
+                    {
+                        doc.InsertParagraph($"{recipe.RecipeName}")
+                            .FontSize(16)
+                            .Bold()
+                            .SpacingAfter(5);
 
-                    doc.InsertParagraph($"Инструкция: {recipe.Instruction}")
-                        .FontSize(12)
-                        .SpacingAfter(10);
+                        doc.InsertParagraph($"Цена: {recipe.Cost:F2} руб.")
+                            .FontSize(14)
+                            .SpacingAfter(2);
+
+                        doc.InsertParagraph($"Инструкция: {recipe.Instruction}")
+                            .FontSize(12)
+                            .SpacingAfter(10);
+
+                        var totalProteins = recipe.RecipeIngredients.Sum(ri => (ri.Ingredients.NutritionalValues.FirstOrDefault()?.Proteins ?? 0) * ri.Quantity);
+                        var totalFats = recipe.RecipeIngredients.Sum(ri => (ri.Ingredients.NutritionalValues.FirstOrDefault()?.Fats ?? 0) * ri.Quantity);
+                        var totalCarbohydrates = recipe.RecipeIngredients.Sum(ri => (ri.Ingredients.NutritionalValues.FirstOrDefault()?.Carbohydrates ?? 0) * ri.Quantity);
+                        var totalEnergyValue = recipe.RecipeIngredients.Sum(ri => (ri.Ingredients.NutritionalValues.FirstOrDefault()?.EnergyValue ?? 0) * ri.Quantity);
+
+                        doc.InsertParagraph($"Пищевая ценность на порцию:")
+                            .FontSize(12)
+                            .SpacingAfter(2);
+
+                        var nutritionTable = doc.AddTable(4, 2);
+                        nutritionTable.Design = TableDesign.TableGrid;
+                        nutritionTable.Rows[0].Cells[0].Paragraphs.First().Append("Белки").Bold();
+                        nutritionTable.Rows[0].Cells[1].Paragraphs.First().Append($"{totalProteins:F2} г");
+                        nutritionTable.Rows[1].Cells[0].Paragraphs.First().Append("Жиры").Bold();
+                        nutritionTable.Rows[1].Cells[1].Paragraphs.First().Append($"{totalFats:F2} г");
+                        nutritionTable.Rows[2].Cells[0].Paragraphs.First().Append("Углеводы").Bold();
+                        nutritionTable.Rows[2].Cells[1].Paragraphs.First().Append($"{totalCarbohydrates:F2} г");
+                        nutritionTable.Rows[3].Cells[0].Paragraphs.First().Append("Энергетическая ценность").Bold();
+                        nutritionTable.Rows[3].Cells[1].Paragraphs.First().Append($"{totalEnergyValue:F2} ккал");
+                        doc.InsertTable(nutritionTable);
+                        doc.InsertParagraph("\n");
+
+                        doc.InsertParagraph("Ингредиенты:")
+                            .FontSize(14)
+                            .SpacingAfter(5);
+
+                        var ingredientsTable = doc.AddTable(recipe.RecipeIngredients.Count + 1, 5);
+                        ingredientsTable.Design = TableDesign.TableGrid;
+
+                        ingredientsTable.Rows[0].Cells[0].Paragraphs.First().Append("№").Bold();
+                        ingredientsTable.Rows[0].Cells[1].Paragraphs.First().Append("Наименование").Bold();
+                        ingredientsTable.Rows[0].Cells[2].Paragraphs.First().Append("Кол-во").Bold();
+                        ingredientsTable.Rows[0].Cells[3].Paragraphs.First().Append("Ед.").Bold();
+                        ingredientsTable.Rows[0].Cells[4].Paragraphs.First().Append("Категория").Bold();
+
+                        for (int i = 0; i < recipe.RecipeIngredients.Count; i++)
+                        {
+                            var ingredient = recipe.RecipeIngredients.ToList()[i].Ingredients;
+
+                            ingredientsTable.Rows[i + 1].Cells[0].Paragraphs.First().Append((i + 1).ToString());
+                            ingredientsTable.Rows[i + 1].Cells[1].Paragraphs.First().Append(ingredient.IngredientName);
+                            ingredientsTable.Rows[i + 1].Cells[2].Paragraphs.First().Append(recipe.RecipeIngredients.ToList()[i].Quantity.ToString());
+                            ingredientsTable.Rows[i + 1].Cells[3].Paragraphs.First().Append(ingredient.Unit);
+                            ingredientsTable.Rows[i + 1].Cells[4].Paragraphs.First().Append(ingredient.IngredientCategories.CategoryName);
+                        }
+
+                        doc.InsertTable(ingredientsTable);
+                        doc.InsertParagraph().SpacingAfter(10);
+                    }
+
+                    doc.Save();
                 }
-
-                doc.Save();
             }
+
+            Process.Start("explorer.exe", filePath);
         }
     }
 }

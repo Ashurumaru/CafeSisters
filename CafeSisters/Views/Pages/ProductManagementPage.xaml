@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:CafeSisters.Views.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-Title="Управление продуктами">
+      Title="Управление продуктами">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -16,12 +16,11 @@ Title="Управление продуктами">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Margin="10">
-            <Button x:Name="CreateIngridients" Content="Создать" Click="CreateIngridients_Click" HorizontalAlignment="Right" Margin="5" Style="{DynamicResource CustomButtonStyle}" Width="80"/>
-            <Button x:Name="AddIngridients" Content="Добавить" Click="AddIngridients_Click" HorizontalAlignment="Right" Margin="5" Style="{DynamicResource CustomButtonStyle}" Width="80"/>
-            
+            <Button x:Name="CreateIngridients" Content="Создать" Click="CreateIngredients_Click" HorizontalAlignment="Right" Margin="5" Style="{DynamicResource CustomButtonStyle}" Width="80"/>
         </StackPanel>
-        
+
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10" Grid.Row="0" HorizontalAlignment="Right">
             <StackPanel Orientation="Vertical" Margin="5">
                 <TextBlock Text="Фильтр по категории:" Style="{DynamicResource StandartText}"/>
@@ -68,10 +67,10 @@ Title="Управление продуктами">
                                         </Border>
                                     </StackPanel>
                                 </StackPanel>
-                               
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,10,5,0">
                                     <Button Content="Редактировать" Click="EditIngredient_Click" Style="{DynamicResource CustomButtonStyle}" CommandParameter="{Binding IngredientId}" Width="120"/>
                                     <Button Content="Удалить" Click="DeleteIngredient_Click" Style="{DynamicResource CustomButtonStyle}" CommandParameter="{Binding IngredientId}" Width="100" Margin="5,0,0,0"/>
+                                    <Button Content="Добавить" Click="ShowAddQuantityForm_Click" Style="{DynamicResource CustomButtonStyle}" CommandParameter="{Binding IngredientId}" Width="100" Margin="5,0,0,0"/>
                                 </StackPanel>
                             </Grid>
                         </Border>
@@ -85,26 +84,43 @@ Title="Управление продуктами">
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <StackPanel Margin="20" HorizontalAlignment="Center">
-                <TextBlock Style="{DynamicResource StandartText}" Text="Название продукта" Margin="0,5"/>
-                <TextBox x:Name="IngredientNameTextBox" Margin="0,5" Width="350" Style="{DynamicResource CustomTextBoxStyle}"/>
-                <TextBlock Style="{DynamicResource StandartText}" Text="Категория" Margin="0,5"/>
-                <ComboBox x:Name="IngredientCategoryComboBox" Margin="0,5" Width="350" DisplayMemberPath="CategoryName" SelectedValuePath="CategoryId"/>
-                <TextBlock Style="{DynamicResource StandartText}" Text="Место хранения" Margin="0,5"/>
-                <ComboBox x:Name="IngredientStorageLocationComboBox" Margin="0,5" Width="350" DisplayMemberPath="LocationName" SelectedValuePath="StorageLocationId"/>
-                <TextBlock Style="{DynamicResource StandartText}" Text="Количество" Margin="0,5"/>
-                <StackPanel Orientation="Horizontal">
-                    <TextBox x:Name="IngredientQuantityTextBox" Margin="0,5" Width="300" Style="{DynamicResource CustomTextBoxStyle}" PreviewTextInput="IngredientQuantityTextBox_PreviewTextInput"/>
-                    <TextBlock x:Name="IngredientUnitTextBlock" Style="{DynamicResource StandartText}" VerticalAlignment="Center" Margin="5"/>
+            <StackPanel Margin="20" >
+   
+                <StackPanel Orientation="Vertical">
+                    <TextBlock HorizontalAlignment="Center" Style="{DynamicResource StandartText}" Text="Название продукта" Margin="0,5"/>
+                    <TextBox x:Name="IngredientNameTextBox" Margin="0,5" Width="350" Style="{DynamicResource CustomTextBoxStyle}"/>
                 </StackPanel>
-                <TextBlock Style="{DynamicResource StandartText}" Text="Белки (грамм)" Margin="0,5"/>
-                <TextBox x:Name="ProteinsTextBox" Margin="0,5" Width="350" Style="{DynamicResource CustomTextBoxStyle}" PreviewTextInput="QuantityTextBox_PreviewTextInput"/>
-                <TextBlock Style="{DynamicResource StandartText}" Text="Жиры (грамм)" Margin="0,5"/>
-                <TextBox x:Name="FatsTextBox" Margin="0,5" Width="350" Style="{DynamicResource CustomTextBoxStyle}" PreviewTextInput="QuantityTextBox_PreviewTextInput"/>
-                <TextBlock Style="{DynamicResource StandartText}" Text="Углеводы (грамм)" Margin="0,5"/>
-                <TextBox x:Name="CarbohydratesTextBox" Margin="0,5" Width="350" Style="{DynamicResource CustomTextBoxStyle}" PreviewTextInput="QuantityTextBox_PreviewTextInput"/>
-                <TextBlock Style="{DynamicResource StandartText}" Text="Калории (ккал)" Margin="0,5"/>
-                <TextBox x:Name="CaloriesTextBox" Margin="0,5" Width="350" Style="{DynamicResource CustomTextBoxStyle}" PreviewTextInput="QuantityTextBox_PreviewTextInput"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Center" Style="{DynamicResource StandartText}" Text="Категория" Margin="0,5"/>
+                    <StackPanel Orientation="Horizontal" Margin="95 0 0 0">
+                        <ComboBox x:Name="IngredientCategoryComboBox" Margin="0,5" Width="320" DisplayMemberPath="CategoryName" SelectedValuePath="CategoryId"/>
+                        <Button x:Name="btnShowCategoryForm" Content="Категория" Click="ManageCategories_Click" HorizontalAlignment="Right" Margin="5" Style="{DynamicResource CustomButtonStyle}" Width="120"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="95 0 0 0" HorizontalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Center" Style="{DynamicResource StandartText}" Text="Место хранения" Margin="0,5"/>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="IngredientStorageLocationComboBox" Margin="0,5" Width="320" DisplayMemberPath="LocationName" SelectedValuePath="StorageLocationId"/>
+                        <Button x:Name="btnShowStorageLocationForm" Content="Место хранения" Click="ManageStorageLocations_Click" HorizontalAlignment="Right" Margin="5" Style="{DynamicResource CustomButtonStyle}" Width="120"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Center" Style="{DynamicResource StandartText}" Text="Количество" Margin="0,5"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="IngredientQuantityTextBox" Margin="0,5" Width="295" Style="{DynamicResource CustomTextBoxStyle}" PreviewTextInput="IngredientQuantityTextBox_PreviewTextInput"/>
+                        <TextBox x:Name="IngredientUnitTextBox" Style="{DynamicResource CustomTextBoxStyle}" Width="50" VerticalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                    <TextBlock HorizontalAlignment="Center" Style="{DynamicResource StandartText}" Text="Белки (грамм)" Margin="0,5"/>
+                    <TextBox x:Name="ProteinsTextBox" Margin="0,5" Width="350" Style="{DynamicResource CustomTextBoxStyle}" PreviewTextInput="QuantityTextBox_PreviewTextInput"/>
+                    <TextBlock HorizontalAlignment="Center" Style="{DynamicResource StandartText}" Text="Жиры (грамм)" Margin="0,5"/>
+                    <TextBox x:Name="FatsTextBox" Margin="0,5" Width="350" Style="{DynamicResource CustomTextBoxStyle}" PreviewTextInput="QuantityTextBox_PreviewTextInput"/>
+                    <TextBlock HorizontalAlignment="Center" Style="{DynamicResource StandartText}" Text="Углеводы (грамм)" Margin="0,5"/>
+                    <TextBox x:Name="CarbohydratesTextBox" Margin="0,5" Width="350" Style="{DynamicResource CustomTextBoxStyle}" PreviewTextInput="QuantityTextBox_PreviewTextInput"/>
+                    <TextBlock HorizontalAlignment="Center" Style="{DynamicResource StandartText}" Text="Калории (ккал)" Margin="0,5"/>
+                    <TextBox x:Name="CaloriesTextBox" Margin="0,5" Width="350" Style="{DynamicResource CustomTextBoxStyle}" PreviewTextInput="QuantityTextBox_PreviewTextInput"/>
+                </StackPanel>
+               
             </StackPanel>
             <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,10,0,15" Grid.Row="1">
                 <StackPanel Orientation="Horizontal">
@@ -113,5 +129,113 @@ Title="Управление продуктами">
                 </StackPanel>
             </Grid>
         </Grid>
+
+        <Grid x:Name="AddIngredientForm" Visibility="Collapsed" Grid.RowSpan="2" Background="White" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="20" HorizontalAlignment="Center">
+                <TextBlock Style="{DynamicResource StandartText}" Text="Выберите продукт" Margin="0,5"/>
+                <ComboBox x:Name="IngredientComboBox" Margin="0,5" Width="350" DisplayMemberPath="IngredientName" SelectedValuePath="IngredientId"/>
+                <TextBlock Style="{DynamicResource StandartText}" Text="Количество" Margin="0,5"/>
+                <TextBox x:Name="AddIngredientQuantityTextBox" Margin="0,5" Width="350" Style="{DynamicResource CustomTextBoxStyle}" PreviewTextInput="QuantityTextBox_PreviewTextInput"/>
+            </StackPanel>
+            <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,10,0,15" Grid.Row="1">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Отмена" Style="{DynamicResource CustomButtonStyle}" Height="30" HorizontalAlignment="Center" Margin="10,0" Width="80" Click="CancelAddButton_Click"/>
+                    <Button Content="Сохранить" Style="{DynamicResource CustomButtonStyle}" Height="30" HorizontalAlignment="Center" Margin="10,0" Width="80" Click="SaveAddButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <!-- Category Management Form -->
+        <Grid x:Name="CategoryManagementForm" Visibility="Collapsed" Grid.RowSpan="2" Background="White" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="0" Margin="20">
+                <TextBlock Text="Категории ингредиентов" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Background="Transparent" Height="300">
+                    <ItemsControl x:Name="CategoryList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{DynamicResource ColorpPeach}" BorderBrush="{DynamicResource ActiveColorpPeach}" BorderThickness="1" CornerRadius="5" Margin="5">
+                                    <StackPanel Margin="5">
+                                        <TextBlock Text="{Binding CategoryName}" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Button Content="Редактировать" Click="EditCategory_Click" Style="{DynamicResource CustomButtonStyle}" CommandParameter="{Binding CategoryId}" Width="100" Margin="10,0,0,0"/>
+                                            <Button Content="Удалить" Click="DeleteCategory_Click" Style="{DynamicResource CustomButtonStyle}" CommandParameter="{Binding CategoryId}" Width="80" Margin="10,0,0,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="20">
+                <TextBlock Text="Название категории" Margin="0,5"/>
+                <TextBox x:Name="CategoryNameTextBox" Margin="0,5" Width="350" Style="{DynamicResource CustomTextBoxStyle}"/>
+                <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,10,0,15">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Отмена" Style="{DynamicResource CustomButtonStyle}" Height="30" HorizontalAlignment="Center" Margin="10,0" Width="80" Click="CancelCategoryButton_Click"/>
+                        <Button Content="Сохранить" Style="{DynamicResource CustomButtonStyle}" Height="30" HorizontalAlignment="Center" Margin="10,0" Width="80" Click="SaveCategoryButton_Click"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+
+        <!-- Storage Location Management Form -->
+        <Grid x:Name="StorageLocationManagementForm" Visibility="Collapsed" Grid.RowSpan="2" Background="White" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="0" Margin="20">
+                <TextBlock Text="Места хранения" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Background="Transparent" Height="300">
+                    <ItemsControl x:Name="StorageLocationList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{DynamicResource ColorpPeach}" BorderBrush="{DynamicResource ActiveColorpPeach}" BorderThickness="1" CornerRadius="5" Margin="5">
+                                    <StackPanel Margin="5">
+                                        <TextBlock Text="{Binding LocationName}" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Button Content="Редактировать" Click="EditStorageLocation_Click" Style="{DynamicResource CustomButtonStyle}" CommandParameter="{Binding StorageLocationId}" Width="100" Margin="10,0,0,0"/>
+                                            <Button Content="Удалить" Click="DeleteStorageLocation_Click" Style="{DynamicResource CustomButtonStyle}" CommandParameter="{Binding StorageLocationId}" Width="80" Margin="10,0,0,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="20">
+                <TextBlock Text="Название места хранения" Margin="0,5"/>
+                <TextBox x:Name="StorageLocationNameTextBox" Margin="0,5" Width="350" Style="{DynamicResource CustomTextBoxStyle}"/>
+                <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,10,0,15">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Отмена" Style="{DynamicResource CustomButtonStyle}" Height="30" HorizontalAlignment="Center" Margin="10,0" Width="80" Click="CancelStorageLocationButton_Click"/>
+                        <Button Content="Сохранить" Style="{DynamicResource CustomButtonStyle}" Height="30" HorizontalAlignment="Center" Margin="10,0" Width="80" Click="SaveStorageLocationButton_Click"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </Page>

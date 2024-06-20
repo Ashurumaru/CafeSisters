@@ -36,6 +36,7 @@ namespace CafeSisters.Views.Pages
             var categoriesRecipe = _context.RecipeCategories.ToList();
             CategoryRecipeComboBox.ItemsSource = categoriesRecipe;
         }
+
         private void LoadIngredients()
         {
             allIngredients = _context.Ingredients.ToList();
@@ -190,14 +191,18 @@ namespace CafeSisters.Views.Pages
         private void ResetRecipeSearch_Click(object sender, RoutedEventArgs e)
         {
             SearchRecipeTextBox.Text = string.Empty;
+            CategoryRecipeComboBox.SelectedIndex = -1; // Reset the category filter
             FilterRecipes();
         }
 
         private void FilterRecipes()
         {
             var searchText = SearchRecipeTextBox.Text.ToLower();
+            var selectedCategoryId = (int?)CategoryRecipeComboBox.SelectedValue;
+
             var filteredRecipes = _context.Recipes
-                .Where(r => string.IsNullOrEmpty(searchText) || r.RecipeName.ToLower().Contains(searchText))
+                .Where(r => (string.IsNullOrEmpty(searchText) || r.RecipeName.ToLower().Contains(searchText)) &&
+                            (!selectedCategoryId.HasValue || r.RecipeCategoryId == selectedCategoryId.Value))
                 .Select(r => new
                 {
                     r.RecipeId,
@@ -229,6 +234,11 @@ namespace CafeSisters.Views.Pages
         private void CategoryFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FilterIngredients();
+        }
+
+        private void CategoryRecipeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FilterRecipes();
         }
 
         private void FilterIngredients()
@@ -312,11 +322,6 @@ namespace CafeSisters.Views.Pages
         private void QuantityTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !decimal.TryParse(((TextBox)sender).Text + e.Text, out _);
-        }
-
-        private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
