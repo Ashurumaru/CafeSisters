@@ -35,6 +35,7 @@ namespace CafeSisters.Views.Pages
                     e.Positions.PositionName,
                     e.Phone,
                     e.Login,
+                    e.Password,
                     TotalRevenue = _context.Orders
                         .Where(o => o.EmployeeId == e.EmployeeId)
                         .Sum(o => o.TotalCost),
@@ -165,6 +166,7 @@ namespace CafeSisters.Views.Pages
                     e.Positions.PositionName,
                     e.Phone,
                     e.Login,
+                    e.Password,
                     TotalRevenue = _context.Orders
                         .Where(o => o.EmployeeId == e.EmployeeId)
                         .Sum(o => o.TotalCost),
